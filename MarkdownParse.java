@@ -67,6 +67,10 @@ public class MarkdownParse {
             }
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             int openParen = markdown.indexOf("(", nextCloseBracket);
+            if(openParen != nextCloseBracket + 1){
+                currentIndex++;
+                continue;
+            }
 
             // The close paren we need may not be the next one in the file
             int closeParen = findCloseParen(markdown, openParen);
