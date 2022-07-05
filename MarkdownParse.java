@@ -55,9 +55,13 @@ public class MarkdownParse {
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
-            int nextCodeBlock = markdown.indexOf("\n```");
+            int nextCodeBlock;
+            nextCodeBlock = markdown.indexOf("```", currentIndex);
+            if(nextCodeBlock != 0){
+                nextCodeBlock = markdown.indexOf("\n```", currentIndex);
+            }
             if(nextCodeBlock < nextOpenBracket && nextCodeBlock != -1) {
-                int endOfCodeBlock = markdown.indexOf("\n```");
+                int endOfCodeBlock = markdown.indexOf("\n```", nextCodeBlock);
                 currentIndex = endOfCodeBlock + 1;
                 continue;
             }
